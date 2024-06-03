@@ -1,4 +1,21 @@
 const ticTacToe = (function () {
+    function createPageElements(){
+        let body = document.querySelector('body');
+        let nav = document.createElement('div');
+        let resetButton = document.createElement('button');
+        resetButton.id = 'resetButton';
+        resetButton.textContent = 'Reset Game'
+        nav.appendChild(resetButton);
+        body.appendChild(nav);
+    }
+
+    function newGame(){
+        let resetButton = document.querySelector('#resetButton');
+        resetButton.addEventListener('click', resetGame)
+    }
+    function resetGame(){
+        createGrid();
+    }
     function createGrid() {
         let cells = {
             1: "-", 2: "-", 3: "-",
@@ -53,16 +70,20 @@ const ticTacToe = (function () {
     }
 
     return {
+        createPageElements,
         playerMove,
+        newGame,
+        resetGame
     };
 })();
 
 // Example usage:
+ticTacToe.createPageElements();
 ticTacToe.playerMove(1, 'X');  // Player X moves to position 1
 ticTacToe.playerMove(5, 'O');  // Player O moves to position 5
 ticTacToe.playerMove(1, 'X');  // Invalid move
 ticTacToe.playerMove(4, 'X');  // Invalid move
 ticTacToe.playerMove(7, 'X');  // Invalid move
-
+ticTacToe.newGame()
 
 
