@@ -14,15 +14,16 @@ const ticTacToe = (function () {
         resetButton.addEventListener('click', resetGame)
     }
     function resetGame(){
-        createGrid();
+        gameBoard.resetGrid()
+        
     }
-    function createGrid() {
+    function createGrid(grid) {
         let cells = {
             1: "-", 2: "-", 3: "-",
             4: "-", 5: "-", 6: "-",
             7: "-", 8: "-", 9: "-",
         };
-
+        
         let body = document.querySelector('body');
         let gameGrid = document.createElement('div');
         body.appendChild(gameGrid);
@@ -31,7 +32,7 @@ const ticTacToe = (function () {
         gameGrid.style.gridTemplate = 'repeat(3, 100px) / repeat(3, 100px)';
         gameGrid.style.border = 'solid black 1px';
         gameGrid.style.justifyContent = 'center';
-
+        
         for (let i = 1; i <= 9; i++) {
             let cell = document.createElement('div');
             cell.id = `cell-${i}`;
@@ -43,7 +44,7 @@ const ticTacToe = (function () {
             cell.style.justifyContent = 'center';
             gameGrid.appendChild(cell);
         }
-
+        
         function updateGrid(position, marker) {
             if (cells[position] === "-") {
                 cells[position] = marker;
@@ -52,10 +53,22 @@ const ticTacToe = (function () {
             }
             return false;
         }
+        function resetGrid(){
+            let cells = {
+                1: "-", 2: "-", 3: "-",
+                4: "-", 5: "-", 6: "-",
+                7: "-", 8: "-", 9: "-",
+            };
+            for (let i = 1; i <= 9; i++) {
+                let cell = document.querySelector(`#cell-${i}`);
+                cell.textContent = cells[i];
+            }
+        }
 
         return {
             updateGrid,
             getGrid: () => cells,
+            resetGrid,
         };
     }
 
@@ -79,11 +92,13 @@ const ticTacToe = (function () {
 
 // Example usage:
 ticTacToe.createPageElements();
+ticTacToe.newGame()
+// ticTacToe.resetGrid();
+
+
+
+// ticTacToe.playerMove(7, 'X');  // Invalid move
 ticTacToe.playerMove(1, 'X');  // Player X moves to position 1
 ticTacToe.playerMove(5, 'O');  // Player O moves to position 5
 ticTacToe.playerMove(1, 'X');  // Invalid move
 ticTacToe.playerMove(4, 'X');  // Invalid move
-ticTacToe.playerMove(7, 'X');  // Invalid move
-ticTacToe.newGame()
-
-
