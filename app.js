@@ -81,12 +81,22 @@ const ticTacToe = (function () {
             console.log("Invalid move! Try again.");
         }
     }
+    function computerMove(position, marker) {
+        if (gameBoard.updateGrid(position, marker)) {
+        console.log(`Player ${marker} moved to position ${position}`);
+        } else {
+            console.log("Invalid move! Try again.");
+        }
+        // Use some sort of logic that utilizes random integers to them use as the updated move
+        // Will also need logic to check for current status if(cell[i] !== '-') do stuff... etc
+    }
 
     return {
         createPageElements,
         playerMove,
         newGame,
-        resetGame
+        resetGame,
+        computerMove
     };
 })();
 
