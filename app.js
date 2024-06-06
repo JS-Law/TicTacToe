@@ -11,24 +11,39 @@ const ticTacToe = (function () {
     ];
 
     function checkWinner(cells, marker) {
+        let winner = document.querySelector('#results');
+        winner.style.display = 'block';
         for (let combination of winningCombinations) {
             if (combination.every(index => cells[index] === marker)) {
+                if (marker === 'X') {
+                    winner.textContent = 'You won!';
+                } else {
+                    winner.textContent = 'You lost!';
+                }
                 return true;
             }
         }
         return false;
     }
     
+    
     function createPageElements() {
         let body = document.querySelector('body');
         let nav = document.createElement('div');
+        
         let resetButton = document.createElement('button');
         resetButton.id = 'resetButton';
         resetButton.textContent = 'Reset Game';
+        
         let gameOverWindow = document.createElement('div')
         gameOverWindow.id = 'game-over'
         gameOverWindow.textContent = 'Game Over'
         gameOverWindow.style.display = 'none'
+
+        let results = document.createElement('div');
+        results.style.display = 'none';
+        results.id = 'results';
+
         nav.appendChild(resetButton);
         body.appendChild(nav);
         body.appendChild(gameOverWindow);
@@ -89,6 +104,8 @@ const ticTacToe = (function () {
             }
             let gameOverWindow = document.querySelector('#game-over');
             gameOverWindow.style.display = 'none';
+            let results = document.querySelector('#results');
+            results.style.display = 'none';
         }
 
         return {
@@ -141,8 +158,7 @@ const ticTacToe = (function () {
             gameBoard.updateGrid(position, 'O');
             console.log(`Computer moved to position ${position}`);
             if (checkWinner(cells, 'O')) {
-
-                // Add logic to handle win, such as stopping further moves
+                gameOver()
             }
         }
     }
