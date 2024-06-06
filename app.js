@@ -25,8 +25,13 @@ const ticTacToe = (function () {
         let resetButton = document.createElement('button');
         resetButton.id = 'resetButton';
         resetButton.textContent = 'Reset Game';
+        let gameOverWindow = document.createElement('div')
+        gameOverWindow.id = 'game-over'
+        gameOverWindow.textContent = 'Game Over'
+        gameOverWindow.style.display = 'none'
         nav.appendChild(resetButton);
         body.appendChild(nav);
+        body.appendChild(gameOverWindow);
     }
 
     function newGame() {
@@ -63,14 +68,14 @@ const ticTacToe = (function () {
             cell.style.display = 'flex';
             cell.style.alignItems = 'center';
             cell.style.justifyContent = 'center';
-            cell.addEventListener('click', () => playerMove(i, 'X')); // Add event listener for player move
+            cell.addEventListener('click', () => playerMove(i, 'X')); 
             gameGrid.appendChild(cell);
         }
 
         function updateGrid(position, marker) {
             if (cells[position] === "-") {
                 cells[position] = marker;
-                document.getElementById(`cell-${position}`).textContent = marker; // Update the HTML
+                document.getElementById(`cell-${position}`).textContent = marker; 
                 return true;
             }
             return false;
@@ -82,6 +87,8 @@ const ticTacToe = (function () {
                 let cell = document.querySelector(`#cell-${i}`);
                 cell.textContent = cells[i];
             }
+            let gameOverWindow = document.querySelector('#game-over');
+            gameOverWindow.style.display = 'none';
         }
 
         return {
@@ -93,14 +100,21 @@ const ticTacToe = (function () {
 
     const gameBoard = createGrid();
 
+    function gameOver(){
+        let gameOverWindow = document.querySelector('#game-over');
+        gameOverWindow.style.display = 'block'
+
+    }
+
     function playerMove(position, marker) {
         if (gameBoard.updateGrid(position, marker)) {
             console.log(`Player ${marker} moved to position ${position}`);
             if (checkWinner(gameBoard.getGrid(), marker)) {
                 console.log(`Player ${marker} wins!`);
-                // Add logic to handle win, such as stopping further moves
+                gameOver()
+                
             } else {
-                computerMove(); // Trigger computer move after player's move if no win
+                computerMove(); 
             }
         } else {
             console.log("Invalid move! Try again.");
@@ -115,7 +129,6 @@ const ticTacToe = (function () {
         let cells = gameBoard.getGrid();
         let emptyCells = [];
         
-        // Find all empty cells
         for (let i = 1; i <= 9; i++) {
             if (cells[i] === "-") {
                 emptyCells.push(i);
@@ -123,13 +136,12 @@ const ticTacToe = (function () {
         }
     
         if (emptyCells.length > 0) {
-            // Pick a random empty cell
             let randomIndex = getRandomInt(0, emptyCells.length - 1);
             let position = emptyCells[randomIndex];
             gameBoard.updateGrid(position, 'O');
             console.log(`Computer moved to position ${position}`);
             if (checkWinner(cells, 'O')) {
-                console.log("Computer wins!");
+
                 // Add logic to handle win, such as stopping further moves
             }
         }
@@ -141,10 +153,10 @@ const ticTacToe = (function () {
         playerMove,
         newGame,
         resetGame,
-        computerMove
+        computerMove,
+        gameOver
     };
 })();
 
-// Example usage:
 ticTacToe.createPageElements();
 ticTacToe.newGame();

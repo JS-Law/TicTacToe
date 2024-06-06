@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Inter;
+  src: url(../assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+}
 body {
   margin: 0;
   box-sizing: border-box;
@@ -12,6 +16,7 @@ body {
   background-size: cover;
   background-position: center;
   height: 100vh;
+  font-family: "inter";
   background-color: rgb(247, 207, 121);
 }
 body #nav-bar #title {
@@ -23,6 +28,15 @@ body #ticTacToe-grid {
   border: 2px solid black;
   border-radius: 0.7rem;
   background-color: whitesmoke;
+}
+body #ticTacToe-grid .cell {
+  font-size: 3rem;
+  transition: ease-in 0.2s;
+}
+body #ticTacToe-grid .cell:hover {
+  background-color: rgb(34, 193, 195);
+  background-color: linear-gradient(0deg, rgb(34, 193, 195) 0%, rgb(67, 192, 173) 38%, rgb(247, 207, 121) 100%);
+  color: rgb(247, 207, 121);
 }
 body #resetButton {
   border: solid 2px rgb(247, 207, 121);

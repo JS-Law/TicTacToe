@@ -1,5 +1,10 @@
+@font-face {
+    font-family: Inter;
+    src: url(../assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+}
 
 $primary-color: #166f71;
+$primary-font: 'inter';
 
 body{
     margin: 0;
@@ -15,6 +20,7 @@ body{
     background-size: cover;
     background-position: center;
     height: 100vh;
+    font-family: $primary-font;
     #nav-bar{
         #title{
             color: black;
@@ -27,7 +33,14 @@ body{
         border-radius: .7rem;
         background-color: whitesmoke;
         .cell{
-            
+            font-size: 3rem;
+            transition: ease-in .2s;
+        }
+        .cell:hover{
+            background-color: rgba(34,193,195,1);
+            background-color: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(67,192,173,1) 38%, rgb(247, 207, 121) 100%);
+            color: rgb(247, 207, 121);
+
         }
     }
     background-color: rgb(247, 207, 121);
