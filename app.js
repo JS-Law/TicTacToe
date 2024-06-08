@@ -11,13 +11,17 @@ const ticTacToe = (function () {
     ];
 
     function checkWinner(cells, marker) {
-        let winner = document.querySelector('#results');
-        winner.style.display = 'block';
+        let winner = document.querySelector('#results-window');
+        console.log("Checking winner for marker:", marker); // Debug line
         for (let combination of winningCombinations) {
+            console.log("Checking combination:", combination); // Debug line
             if (combination.every(index => cells[index] === marker)) {
+                console.log("Winning combination found:", combination); // Debug line
                 if (marker === 'X') {
+                    winner.style.display = 'block';
                     winner.textContent = 'You won!';
                 } else {
+                    winner.style.display = 'block';
                     winner.textContent = 'You lost!';
                 }
                 return true;
@@ -25,6 +29,7 @@ const ticTacToe = (function () {
         }
         return false;
     }
+    
     
     
     function createPageElements() {
@@ -43,10 +48,16 @@ const ticTacToe = (function () {
         let results = document.createElement('div');
         results.style.display = 'none';
         results.id = 'results';
+        
+        let resultsWindow = document.createElement('div');
+        resultsWindow.id = 'results-window';
+        resultsWindow.style.display = 'none';
 
         nav.appendChild(resetButton);
         body.appendChild(nav);
-        body.appendChild(gameOverWindow);
+        body.appendChild(resultsWindow);
+        resultsWindow.appendChild(gameOverWindow);
+        resultsWindow.appendChild(results);
     }
 
     function newGame() {
@@ -102,10 +113,10 @@ const ticTacToe = (function () {
                 let cell = document.querySelector(`#cell-${i}`);
                 cell.textContent = cells[i];
             }
-            let gameOverWindow = document.querySelector('#game-over');
+            let gameOverWindow = document.querySelector('#results-window');
             gameOverWindow.style.display = 'none';
-            let results = document.querySelector('#results');
-            results.style.display = 'none';
+            // let results = document.querySelector('#results');
+            // results.style.display = 'none';
         }
 
         return {

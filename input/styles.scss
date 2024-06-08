@@ -24,6 +24,7 @@ body{
     #nav-bar{
         #title{
             color: black;
+            font-size: 3rem;
         }
     }
     #ticTacToe-grid{
@@ -48,5 +49,19 @@ body{
         border: solid 2px rgb(247, 207, 121);
         border-radius: .6rem;
         padding: .5rem;
+    }
+    #results-window{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: whitesmoke;
+        border: 2px black solid;
+        padding: 2rem;
+        border-radius: .6rem;
+
+        #game-over{
+            
+        }
     }
 }
